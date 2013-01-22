@@ -10,17 +10,22 @@
  * Created: 2013-01-22
  */
   $.fn.extend({          
-    karousel: function() { 
-      return this.each(function() {
+    karousel: function(options) {
+      // Default options
+      var defaults = {
+          firstSlide: 1
+      };       
+      var options = $.extend(defaults, options);
+      // For each matched element
+      return this.each(function(e) {
         // Initialise
-        var firstSlide = 1;
-        moveToSlide(firstSlide);
+        moveToSlide(options.firstSlide);
         // Button handlers
-        $('#left').click(function() {
+        $('#left').click(function(e) {
           moveLeft();
           return false;
         });
-        $('#right').click(function() {
+        $('#right').click(function(e) {
           moveRight();
           return false;
         });
