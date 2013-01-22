@@ -2,13 +2,18 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>karousel</title>
-    <meta name="description" content="">
+    <title>Karousel</title>
+    <meta name="description" content="A simple jQuery carousel plugin">
     <meta name="viewport" content="width=device-width">
     <link href='http://fonts.googleapis.com/css?family=Brawler' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="css/style.css">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="main.js"></script>
+    <script src="../jquery.karousel.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $(document).karousel();
+      });
+    </script>
   </head>
   <body>
     <div class="wrapper">

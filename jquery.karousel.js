@@ -1,8 +1,14 @@
-$(document).ready(function() {
-  $(document).karousel();
-});
-
-(function($){
+;
+(function($) {
+/*
+ * jquery.karousel.js - version 0.1
+ * A simple jQuery carousel plugin
+ * 
+ * Copyright (c) 2013, Jon Alport (http://jonalport.com)
+ * Licensed under the MIT License (MIT-LICENSE.txt)
+ * http://www.opensource.org/licenses/mit-license.php
+ * Created: 2013-01-22
+ */
   $.fn.extend({          
     karousel: function() { 
       return this.each(function() {
