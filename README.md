@@ -29,7 +29,7 @@ These are the things you need to have in place to get started:
     </script>
 
 ## In the body
-
+```
     <ul id="slides">
       <li>
         <p>Slide 1</p>
@@ -41,3 +41,18 @@ These are the things you need to have in place to get started:
         <p>Slide 3</p>
       </li>
     </ul>
+```
+
+```html
+    <ul id="slides">
+      <li>
+        <p>Slide 1</p>
+      </li>
+      <li>
+        <p>Slide 2</p>
+      </li>
+      <li>
+        <p>Slide 3</p>
+      </li>
+    </ul>
+```

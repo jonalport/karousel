@@ -14,6 +14,8 @@
       options = $.extend(defaults, options);
       // For each matched element
       return this.each(function() {
+        // Save a reference to this
+        var karousel = $(this);
         // Initialise
         moveToSlide(options.firstSlide);
         // Button handlers
@@ -40,17 +42,17 @@
         });
         // Move to slide number (slide numbers start at 1)
         function moveToSlide(slideNum) {
-          var slidePadding = parseInt($('#slides li').css('margin-left'), 10);
-          var slideWidth = parseInt($('#slides li').css('width'), 10);
-          var slideContainerWidth = parseInt($('#slides').parent().css('width'), 10);
+          var slidePadding = parseInt(karousel.children('li').css('margin-left'), 10);
+          var slideWidth = parseInt(karousel.children('li').css('width'), 10);
+          var slideContainerWidth = parseInt(karousel.parent().css('width'), 10);
           var totalSlideWidth = slideWidth + slidePadding * 2;
           var startPosition = totalSlideWidth * -1 * (slideNum - 1) + slideContainerWidth / 2 - slideWidth / 2 - slidePadding;
-          $('ul#slides').css('margin-left', startPosition + 'px').children().removeClass('active').eq(slideNum - 1).addClass('active');
+          karousel.css('margin-left', startPosition + 'px').children().removeClass('active').eq(slideNum - 1).addClass('active');
           $('ul#filmstrip').children().removeClass('active').eq(slideNum - 1).addClass('active');
         }
         // Which slide is active?
         function getActiveSlideNum() {
-          return $('#slides .active').index() + 1;
+          return karousel.children('.active').index() + 1;
         }
         // Activate the slide to the left
         function showSlideToLeft() {
@@ -60,7 +62,7 @@
         }
         // Activate the slide to the right
         function showSlideToRight() {
-          if(getActiveSlideNum() < $('#slides > *').length) {
+          if(getActiveSlideNum() < karousel.children('li').length) {
            moveToSlide(getActiveSlideNum() + 1);  
           }
         }
