@@ -1,6 +1,6 @@
 body {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
   font-size: 11px;
   line-height: 15px;
   font-family: helvetica;
@@ -19,7 +19,7 @@ body {
 }
 /* Slides list */
 #slides {
-	list-style: none;
+  list-style: none;
   width: 2000px;
   overflow: hidden;
   margin: 0;
@@ -31,7 +31,7 @@ body {
 }
 #slides li {
   background-color: #DDD;
-	display: block;
+  display: block;
   float: left;
   width: 400px;
   min-height: 300px;
