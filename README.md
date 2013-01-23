@@ -2,6 +2,10 @@
 
 A simple jQuery carousel plugin by [Jon Alport](http://jonalport.com/)
 
+## Demo
+
+[http://github.jonalport.com/karousel/example/](http://github.jonalport.com/karousel/example/)
+
 ## Quick start
 
 These are the things you need to have in place to get started:
@@ -37,7 +41,3 @@ These are the things you need to have in place to get started:
         <p>Slide 3</p>
       </li>
     </ul>
-
-## Demo
-
-[http://github.jonalport.com/karousel/example/](http://github.jonalport.com/karousel/example/)
