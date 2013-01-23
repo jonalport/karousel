@@ -1,0 +1,90 @@
+body {
+	margin: 0;
+	padding: 0;
+  font-size: 11px;
+  line-height: 15px;
+  font-family: helvetica;
+  color: #444;
+}
+.wrapper {
+  width: 720px;
+  background: #EEE url('http://subtlepatterns.subtlepatterns.netdna-cdn.com/patterns/pw_maze_white.png');
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 100px 0;
+}
+.controls {
+  padding: 50px;
+  font-size: 30px;
+}
+/* Slides list */
+#slides {
+	list-style: none;
+  width: 2000px;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  transition: margin-left .2s ease-in-out;
+  -moz-transition: margin-left .2s ease-in-out;
+  -webkit-transition: margin-left .2s ease-in-out;
+  -o-transition: margin-left .2s ease-in-out;
+}
+#slides li {
+  background-color: #DDD;
+	display: block;
+  float: left;
+  width: 400px;
+  min-height: 300px;
+  overflow: hidden;
+  margin: 0 50px;
+  padding: 0;
+  border-radius: 4px;
+}
+#slides h2 {
+  margin: 30px 20px 10px 230px;
+  font-family: Brawler, serif;
+  /*text-transform: uppercase;*/
+  font-weight: normal;
+}
+#slides p {
+  margin: 0 20px 0 230px;
+}
+#slides img {
+  display: block;
+  width: 180px;
+  height: 180px;
+  float: left;
+  background-color: #CCC;
+  margin: 30px 0 0 30px;
+  border-radius: 4px;
+}
+/* Filmstrip list */
+#filmstrip {
+  list-style: none;
+  display: block;
+  margin: 40px auto 0 auto;
+  padding: 0;
+  background: #000;
+  overflow: hidden;
+  width: 200px;
+}
+#filmstrip li {
+  background-color: #DDD;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+#filmstrip a {
+  opacity: 0.5;
+  width: 50px;
+  height: 50px;
+  display: block;
+  float: left;
+  transition: opacity .2s ease-in-out;
+  -moz-transition: opacity .2s ease-in-out;
+  -webkit-transition: opacity .2s ease-in-out;
+  -o-transition: opacity .2s ease-in-out;
+}
+#filmstrip a:hover, #filmstrip .active a {
+  opacity: 1;
+}
