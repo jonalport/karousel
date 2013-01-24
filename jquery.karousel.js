@@ -19,11 +19,11 @@
         // Initialise
         moveToSlide(options.firstSlide);
         // Button handlers
-        $('#left').click(function() {
+        karousel.children('.left').click(function() {
           showSlideToLeft();
           return false;
         });
-        $('#right').click(function() {
+        karousel.children('.right').click(function() {
           showSlideToRight();
           return false;
         });
@@ -39,6 +39,11 @@
             showSlideToRight();
             return false;
           }
+        });
+        // Filmstrip click handler
+        $('ul#filmstrip a').click(function() {
+          console.log('Do something!');
+          return false;
         });
         // Move to slide number (slide numbers start at 1)
         function moveToSlide(slideNum) {
