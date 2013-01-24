@@ -30,7 +30,7 @@ body {
   -o-transition: margin-left .2s ease-in-out;
 }
 #slides li {
-  background-color: #DDD;
+  background: #DDD url('http://subtlepatterns.subtlepatterns.netdna-cdn.com/patterns/honey_im_subtle.png');
   display: block;
   float: left;
   width: 400px;

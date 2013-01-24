@@ -3,7 +3,7 @@
   /*
    * jquery.karousel.js - version 0.1
    * A simple jQuery carousel plugin
-   * Copyright (c) 2013, Jon Alport (http://jonalport.com)
+   * Copyright (c) 2013, Jon Alport (http://jonalport.com/)
    */
   $.fn.extend({          
     karousel: function(options) {
@@ -42,7 +42,6 @@
         });
         // Filmstrip click handler
         $('ul#filmstrip a').click(function() {
-          console.log('Do something!');
           return false;
         });
         // Move to slide number (slide numbers start at 1)
