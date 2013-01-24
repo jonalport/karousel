@@ -16,14 +16,18 @@
       return this.each(function() {
         // Save a reference to this
         var karousel = $(this);
+        // Save a reference to the slides list
+        var slides = karousel.find('.slides ul');
+        // Save a reference to the filmstrip list
+        var filmstrip = karousel.find('.filmstrip ul');
         // Initialise
         moveToSlide(options.firstSlide);
         // Button handlers
-        karousel.children('.left').click(function() {
+        karousel.find('.left').click(function() {
           showSlideToLeft();
           return false;
         });
-        karousel.children('.right').click(function() {
+        karousel.find('.right').click(function() {
           showSlideToRight();
           return false;
         });
@@ -41,22 +45,23 @@
           }
         });
         // Filmstrip click handler
-        $('ul#filmstrip a').click(function() {
+        $('.filmstrip a').click(function() {
+          moveToSlide($(this).parent().index() + 1);
           return false;
         });
         // Move to slide number (slide numbers start at 1)
         function moveToSlide(slideNum) {
-          var slidePadding = parseInt(karousel.children('li').css('margin-left'), 10);
-          var slideWidth = parseInt(karousel.children('li').css('width'), 10);
-          var slideContainerWidth = parseInt(karousel.parent().css('width'), 10);
+          var slidePadding = parseInt(slides.children('li').css('margin-left'), 10);
+          var slideWidth = parseInt(slides.children('li').css('width'), 10);
+          var slideContainerWidth = parseInt(slides.parent().css('width'), 10);
           var totalSlideWidth = slideWidth + slidePadding * 2;
           var startPosition = totalSlideWidth * -1 * (slideNum - 1) + slideContainerWidth / 2 - slideWidth / 2 - slidePadding;
-          karousel.css('margin-left', startPosition + 'px').children().removeClass('active').eq(slideNum - 1).addClass('active');
-          $('ul#filmstrip').children().removeClass('active').eq(slideNum - 1).addClass('active');
+          slides.css('margin-left', startPosition + 'px').children().removeClass('inactive active').addClass('inactive').eq(slideNum - 1).removeClass('inactive').addClass('active');
+          filmstrip.children().removeClass('inactive active').addClass('inactive').eq(slideNum - 1).removeClass('inactive').addClass('active');
         }
         // Which slide is active?
         function getActiveSlideNum() {
-          return karousel.children('.active').index() + 1;
+          return slides.children('.active').index() + 1;
         }
         // Activate the slide to the left
         function showSlideToLeft() {
@@ -66,7 +71,7 @@
         }
         // Activate the slide to the right
         function showSlideToRight() {
-          if(getActiveSlideNum() < karousel.children('li').length) {
+          if(getActiveSlideNum() < slides.children('li').length) {
            moveToSlide(getActiveSlideNum() + 1);  
           }
         }

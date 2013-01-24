@@ -7,18 +7,17 @@ body {
   color: #444;
 }
 .wrapper {
-  width: 720px;
+  width: 960px;
   background: #EEE url('http://subtlepatterns.subtlepatterns.netdna-cdn.com/patterns/pw_maze_white.png');
   overflow: hidden;
   margin: 0 auto;
   padding: 100px 0;
 }
-.controls {
-  padding: 50px;
-  font-size: 30px;
-}
 /* Slides list */
-#slides {
+.slides {
+  position: relative;
+}
+.slides ul {
   list-style: none;
   width: 2000px;
   overflow: hidden;
@@ -29,7 +28,7 @@ body {
   -webkit-transition: margin-left .2s ease-in-out;
   -o-transition: margin-left .2s ease-in-out;
 }
-#slides li {
+.slides li {
   background: #DDD url('http://subtlepatterns.subtlepatterns.netdna-cdn.com/patterns/honey_im_subtle.png');
   display: block;
   float: left;
@@ -39,17 +38,21 @@ body {
   margin: 0 50px;
   padding: 0;
   border-radius: 4px;
+  transition: opacity 0.5s ease-in-out;
+  -moz-transition: opacity 0.5s ease-in-out;
+  -webkit-transition: opacity 0.5s ease-in-out;
+  -o-transition: opacity 0.5s ease-in-out;
 }
-#slides h2 {
+.slides h2 {
   margin: 30px 20px 10px 230px;
   font-family: Brawler, serif;
   /*text-transform: uppercase;*/
   font-weight: normal;
 }
-#slides p {
+.slides p {
   margin: 0 20px 0 230px;
 }
-#slides img {
+.slides img {
   display: block;
   width: 180px;
   height: 180px;
@@ -58,8 +61,46 @@ body {
   margin: 30px 0 0 30px;
   border-radius: 4px;
 }
+.slides .inactive {
+  opacity: 0.3;
+}
+.slides .controls {
+  position: absolute;
+  width: 100%;
+  height: 46px;
+  z-index: 2;
+  top: 127px;
+  left: 0px;
+  right: 0px;
+}
+.slides .controls a {
+  width: 31px;
+  height: 46px;
+  display: block;
+  position: absolute;
+  opacity: 0.5;
+  overflow: hidden;
+  text-indent: -999px;
+  transition: opacity 0.2s ease-in-out;
+  -moz-transition: opacity 0.2s ease-in-out;
+  -webkit-transition: opacity 0.2s ease-in-out;
+  -o-transition: opacity 0.2s ease-in-out;
+}
+.slides .controls a:hover {
+  opacity: 1;
+}
+.slides .controls .left {
+  background: url('../images/left.png') center center no-repeat;
+  left: 210px;
+  top: 0px;
+}
+.slides .controls .right {
+  background: url('../images/right.png') center center no-repeat;
+  right: 210px;
+  top: 0px;
+}
 /* Filmstrip list */
-#filmstrip {
+.filmstrip ul {
   list-style: none;
   display: block;
   margin: 40px auto 0 auto;
@@ -68,23 +109,28 @@ body {
   overflow: hidden;
   width: 200px;
 }
-#filmstrip li {
+.filmstrip li {
   background-color: #DDD;
   display: block;
   margin: 0;
   padding: 0;
 }
-#filmstrip a {
-  opacity: 0.5;
+.filmstrip li a {
   width: 50px;
   height: 50px;
   display: block;
   float: left;
-  transition: opacity .2s ease-in-out;
-  -moz-transition: opacity .2s ease-in-out;
-  -webkit-transition: opacity .2s ease-in-out;
-  -o-transition: opacity .2s ease-in-out;
+  transition: opacity .3s ease-in-out;
+  -moz-transition: opacity .3s ease-in-out;
+  -webkit-transition: opacity .3s ease-in-out;
+  -o-transition: opacity .3s ease-in-out;
 }
-#filmstrip a:hover, #filmstrip .active a {
+.filmstrip .inactive a {
+  opacity: 0.5;
+}
+.filmstrip li a:hover {
   opacity: 1;
+}
+.filmstrip .controls {
+  display: none;
 }
