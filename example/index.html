@@ -5,13 +5,15 @@
     <title>Karousel</title>
     <meta name="description" content="A simple jQuery carousel plugin">
     <meta name="viewport" content="width=device-width">
-    <link href='http://fonts.googleapis.com/css?family=Brawler' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../jquery.karousel.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="../jquery.karousel.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
-        $('.karousel').karousel({firstSlide: 1});
+        $('.karousel').karousel({
+          showFilmstripControls: false
+        });
       });
     </script>
   </head>
@@ -49,22 +51,22 @@
         <ul>
           <li>
             <a href="#">
-              <img alt="cat" width="50" height="50" src="http://placekitten.com/g/50/50" />
+              <img alt="cat" width="100" height="100" src="http://placekitten.com/g/100/100" />
             </a>
           </li>
           <li>
             <a href="#">
-              <img alt="cat" width="50" height="50" src="http://placekitten.com/50/50" />
+              <img alt="cat" width="100" height="100" src="http://placekitten.com/100/100" />
             </a>
           </li>
           <li>
             <a href="#">
-              <img alt="cat" width="50" height="50" src="http://placekitten.com/g/50/50" />
+              <img alt="cat" width="100" height="100" src="http://placekitten.com/g/100/100" />
             </a>
           </li>
           <li>
             <a href="#">
-              <img alt="cat" width="50" height="50" src="http://placekitten.com/50/50" />
+              <img alt="cat" width="100" height="100" src="http://placekitten.com/100/100" />
             </a>
           </li>
         </ul>
