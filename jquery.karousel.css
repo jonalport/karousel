@@ -1,3 +1,6 @@
+.karousel {
+  overflow: hidden;
+}
 /* Slides list */
 .karousel .slides {
   position: relative;

@@ -11,14 +11,15 @@
     <script src="../jquery.karousel.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
-        $('.karousel').karousel({
-          showFilmstripControls: false
+        $('#slideshow-1').karousel({
+          showFilmstripControls: false, 
+          showSlideControlsOnOutside: true
         });
       });
     </script>
   </head>
   <body>
-    <div class="karousel wrapper">
+    <div id="slideshow-1" class="karousel">
       <div class="slides">
         <ul>
           <li>

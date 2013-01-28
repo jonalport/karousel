@@ -7,10 +7,9 @@ body {
   font-family: helvetica, arial, serif;
   color: #444;
 }
-.wrapper {
+.karousel {
   width: 960px;
   background: #EEE;
-  overflow: hidden;
   margin: 0 auto;
   padding: 100px 0;
 }

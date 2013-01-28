@@ -10,10 +10,11 @@
       // Default options
       var defaults = {
           firstSlide: 1, 
-          slideArrowPadding: 40, // Relative to an individual slide
+          slideArrowPadding: 40, // The amount of space for arrow edge to slide
           filmstripArrowPadding: 20, // Relative to the filmstrip page width
           useKeyboardShortcuts: true, 
           showSlideControls: true, 
+          showSlideControlsOnOutside: true, // If false, then inside slide
           showFilmstrip: true,
           showFilmstripControls: true
       };       
@@ -57,7 +58,12 @@
         // Set the slides controls vertical position
         slidesControls.css('top', slides.height() / 2 - slidesControls.height() / 2 + 'px');
         // Set the slide arrows to be just on either side of the slide
-        var slideArrowOffset = slidesControls.width() / 2 - slideWidth / 2 - slideControlLeft.width() - options.slideArrowPadding;
+        if(options.showSlideControlsOnOutside === true) {
+          var slideArrowOffset = slidesControls.width() / 2 - slideWidth / 2 - slideControlLeft.width() - options.slideArrowPadding;
+        }
+        else {
+          var slideArrowOffset = slidesControls.width() / 2 - slideWidth / 2 + options.slideArrowPadding;
+        }
         slideControlLeft.css('left',  slideArrowOffset + 'px');
         slideControlRight.css('right', slideArrowOffset + 'px');
         // Set the filmstrip controls vertical position
