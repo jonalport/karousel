@@ -74,18 +74,20 @@
 /* Filmstrip list */
 .karousel .filmstrip {
   position: relative;
+  margin: 0 auto;
+  overflow: hidden;
 }
 .karousel .filmstrip ul {
   list-style: none;
   display: block;
   padding: 0;
-  overflow: hidden;
   margin: 0 auto;
   text-align: center;
 }
 .karousel .filmstrip li {
   display: inline;
   font-size: 0;
+  height: 100px;
 }
 .karousel .filmstrip li a {
   transition: opacity .3s ease-in-out;

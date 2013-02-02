@@ -16,7 +16,8 @@
           showSlideControls: true, 
           showSlideControlsOnOutside: true, // If false, then inside slide
           showFilmstrip: true,
-          showFilmstripControls: true
+          showFilmstripControls: true, 
+          filmstripSize: 100 // The max number of filmstrip items to show. Only kicks in if lower than what can be seen
       };       
       options = $.extend(defaults, options);
       // For each matched element
@@ -33,6 +34,7 @@
         // Filmstrip arrows
         var slideControlLeft = slidesControls.children('.left');
         var slideControlRight = slidesControls.children('.right');
+        var filmstripContainer = karousel.find('.filmstrip');
         // Filmstrip list
         var filmstrip = karousel.find('.filmstrip ul');
         // Filmstrip controls
@@ -48,7 +50,33 @@
         var slideWidth = slides.children('li').outerWidth();
         var numFilmstripItems = filmstrip.children('li').length;
         var filmstripItemWidth = filmstrip.children('li').outerWidth(); // Todo: Add potential margin?
+        var filmstripItemHeight = filmstrip.children('li').outerHeight();
         var filmstripItemsWidth = numFilmstripItems * filmstripItemWidth;
+        var filmstripContainerWidth = filmstripContainer.outerWidth();
+        // numFilmstripPageItems: work out the max number of filmstrip items we should show, if not specified
+        var numFilmstripPageItems = Math.floor(filmstripContainerWidth / filmstripItemWidth) - 1; // Add 1 extra for arrow button padding
+        /*
+         * If options size is too large, set it to correct size.
+         *
+         * We have:
+         *   options.filmstripSize: the number of items to show in a page (specified)
+         *   numFilmstripPageItems: the number that can fit (worked out)
+         *   numFilmstripItems: the number of items (counted)
+         */        
+        options.filmstripSize = Math.min(options.filmstripSize, numFilmstripPageItems, numFilmstripItems);
+        var widthOfFilmstripPage = options.filmstripSize * filmstripItemWidth;        
+        console.log(options.filmstripSize);
+        console.log(widthOfFilmstripPage);
+        console.log(filmstripItemsWidth);
+        // filmstrip.children('li').slice(options.filmstripSize).hide();
+        // Set the film strip page width
+
+        // console.log(filmstripItemHeight);
+
+        filmstripContainer.css('width', widthOfFilmstripPage + 'px');
+        filmstrip.css('width', numFilmstripItems * filmstripItemWidth + 'px');
+        // filmstrip.css('height', filmstripItemHeight + 'px');
+
         var slideContainerWidth = parseInt(slides.parent().css('width'), 10);
         var totalSlideWidth = slideWidth + slideMargin * 2; // Width of a slide, including margins
         var numSlides = slides.children('li').length;
