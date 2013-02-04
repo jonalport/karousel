@@ -34,6 +34,6 @@ body {
   background: #DDD;
 }
 /* Filmstrip styles */
-.karousel .filmstrip ul {
+.karousel .filmstrip {
   margin-top: 40px;
 }
