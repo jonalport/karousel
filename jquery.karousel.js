@@ -9,15 +9,15 @@
     karousel: function(options) {
       // Default options
       var defaults = {
-          firstSlide: 1, 
-          slideArrowPadding: 40, // The amount of space for arrow edge to slide
-          filmstripArrowPadding: 20, // Relative to the filmstrip page width
-          useKeyboardShortcuts: true, 
-          showSlideControls: true, 
-          showSlideControlsOnOutside: true, // If false, then inside slide
-          showFilmstrip: true,
-          showFilmstripControls: true, 
-          filmstripSize: 100 // The max number of filmstrip items to show. Only kicks in if lower than what can be seen
+        firstSlide: 1, 
+        slideArrowPadding: 40, // The amount of space for arrow edge to slide
+        filmstripArrowPadding: 20, // Relative to the filmstrip page width
+        useKeyboardShortcuts: true, 
+        showSlideControls: true, 
+        showSlideControlsOnOutside: true, // If false, then inside slide
+        showFilmstrip: true,
+        showFilmstripControls: true, 
+        filmstripSize: 100 // The max number of filmstrip items to show. Only kicks in if lower than what can be seen
       };       
       options = $.extend(defaults, options);
       // For each matched element
@@ -48,6 +48,12 @@
         // Calculate some dimensions
         var slideMargin = parseInt(slides.children('li').css('margin-left'), 10);
         var slideWidth = slides.children('li').outerWidth();
+
+        // Set up filmstrip --------------------------------
+        
+        if(options.showFilmstrip === true) {
+          karousel.find('.filmstrip').show();
+        }
         var numFilmstripItems = filmstrip.children('li').length;
         var filmstripItemWidth = filmstrip.children('li').outerWidth(); // Todo: Add potential margin?
         var filmstripItemHeight = filmstrip.children('li').outerHeight();
@@ -74,6 +80,12 @@
         filmstrip.children().addClass('invisible').slice(0, options.filmstripSize).addClass('visible').removeClass('invisible');
         checkFilmstripArrows();
 
+        // Set up pager --------------------------------
+
+        // Only show if items can't fit in one page
+        if(options.filmstripSize < numFilmstripItems) {
+          var pager = createPager();
+        }
         var slideContainerWidth = parseInt(slides.parent().css('width'), 10);
         var totalSlideWidth = slideWidth + slideMargin * 2; // Width of a slide, including margins
         var numSlides = slides.children('li').length;
@@ -98,7 +110,8 @@
         filmstripControlLeft.css('left',  filmstripArrowOffset + 'px');
         filmstripControlRight.css('right', filmstripArrowOffset + 'px');
         // Begin
-        moveToSlide(options.firstSlide);
+        // moveToSlide(options.firstSlide); // Passing in start slide is broken for now. Need to make it work with filmstrip properly
+        moveToSlide(1);
         // Button handlers
         karousel.find('.slides .left').click(function() {
           showSlideToLeft();
@@ -131,46 +144,59 @@
             }
           });
         }
-        // Filmstrip click handler
+
+        // Click handlers --------------------------------
+
+        // Filmstrip item
         $('.filmstrip li a').click(function() {
           moveToSlide($(this).parent().index() + 1);
           return false;
         });
+
+        // Pager button
+        $('.pager span').click(function() {
+          scrollToPage($(this).attr('data-page-number'));
+          return false;
+        });
+
         function pageFilmstripRight() {
-          // One page of elements to right
-          var invisibleElementsToRight = filmstrip.children('.visible').last().nextAll().slice(0, options.filmstripSize); 
-          var numToMove = invisibleElementsToRight.length;
-          
-          if(numToMove === 0) {
+          scrollToPage(parseInt(getCurrentPageNumber()) + 1);
+        }
+        function createPager() {
+          karousel.find('.filmstrip').append('<div class="pager"></div>');
+          var pager = karousel.find('.filmstrip .pager');
+          var numFilmstripPages = Math.ceil(numFilmstripItems / options.filmstripSize);
+
+          for(var i = 1; i <= numFilmstripPages; i ++) {
+            pager.append('<span data-page-number="' + i + '"></span>');
+          }
+          pager.children(':first').addClass('active').siblings().addClass('inactive');
+          return pager;
+        }
+        function getCurrentPageNumber() {
+          return pager.children('.active').attr('data-page-number');
+        }
+        // On the filmstrip:
+        function scrollToPage(pageNumber) {
+          var numFilmstripPages = Math.ceil(numFilmstripItems / options.filmstripSize);
+          if(pageNumber === getCurrentPageNumber() || pageNumber < 1 || pageNumber > numFilmstripPages) {
             return false;
           }
-          // If there isn't a full page of items available to the right, we will keep this number of items on the right of the current page
-          var remainderOnLeft = options.filmstripSize - numToMove;
-          var currentLeftMargin = parseInt(filmstrip.css('margin-left'));
-          var newLeftMargin = currentLeftMargin -= numToMove * filmstripItemWidth;
+          var firstItemNumber = options.filmstripSize * (pageNumber - 1) + 1;
+          var lastItemNumber = Math.min(options.filmstripSize * pageNumber, numFilmstripItems);
+          pager.children().removeClass('inactive active').eq(pageNumber - 1).addClass('active').siblings().addClass('inactive');
+          filmstrip.children().removeClass('invisible visible').slice(firstItemNumber - 1, lastItemNumber).addClass('visible').siblings().not('.visible').addClass('invisible');
+          var newLeftMargin = (lastItemNumber - options.filmstripSize) * filmstripItemWidth * -1;
+          
+          if(newLeftMargin > 0) {
+            newLeftMargin = 0;
+          }
           filmstrip.css('margin-left', newLeftMargin + 'px');
-          filmstrip.children().removeClass('visible').addClass('invisible');
-          invisibleElementsToRight.addClass('visible').removeClass('invisible');
-          filmstrip.children('.visible:first').prevAll().slice(0, remainderOnLeft).addClass('visible').removeClass('invisible');
           checkFilmstripArrows();
+          return true;
         }
         function pageFilmstripLeft() {
-          // One page of elements to left
-          var invisibleElementsToLeft = filmstrip.children('.visible').first().prevAll().slice(0, options.filmstripSize); 
-          var numToMove = invisibleElementsToLeft.length;
-          
-          if(numToMove === 0) {
-            return false;
-          }
-          // If there isn't a full page of items available to the right, we will keep this number of items on the right of the current page
-          var remainderOnRight = options.filmstripSize - numToMove;
-          var currentLeftMargin = parseInt(filmstrip.css('margin-left'));
-          var newLeftMargin = currentLeftMargin += numToMove * filmstripItemWidth;
-          filmstrip.css('margin-left', newLeftMargin + 'px');
-          filmstrip.children().removeClass('visible').addClass('invisible');
-          invisibleElementsToLeft.addClass('visible').removeClass('invisible');
-          filmstrip.children('.visible:last').nextAll().slice(0, remainderOnRight).addClass('visible').removeClass('invisible');
-          checkFilmstripArrows();
+          scrollToPage(parseInt(getCurrentPageNumber()) - 1);
         }
         // Add inactive class if they shouldn't do anything (nothing to left, or nothing to right)
         function checkFilmstripArrows() {
@@ -196,15 +222,17 @@
             slidesControls.find('.right').addClass('inactive');
           }
           // Page the filmstrip if we've moved out of range
-          var activeIndex = slides.children('.active').index();
-          var firstVisibleIndex= filmstrip.children('.visible:first').index();
-          var lastVisibleIndex = filmstrip.children('.visible:last').index();
+          if(options.showFilmstrip === true) {
+            var activeIndex = slides.children('.active').index();
+            var firstVisibleIndex= filmstrip.children('.visible:first').index();
+            var lastVisibleIndex = filmstrip.children('.visible:last').index();
 
-          if(activeIndex > lastVisibleIndex) {
-            pageFilmstripRight();
-          }
-          else if(activeIndex < firstVisibleIndex) {
-            pageFilmstripLeft();
+            if(activeIndex > lastVisibleIndex) {
+              pageFilmstripRight();
+            }
+            else if(activeIndex < firstVisibleIndex) {
+              pageFilmstripLeft();
+            }            
           }
         }
         // Which slide is active?

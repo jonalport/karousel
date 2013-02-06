@@ -75,6 +75,7 @@
 /* Filmstrip */
 .karousel .filmstrip {
   position: relative;
+  display: none;
 }
 .karousel .filmstrip .items {
   margin: 0 auto;
@@ -148,4 +149,29 @@
   right: 0px; /* Set with JS */
   top: 0px;
   background: url('images/right-small.png') center center no-repeat;
+}
+/* Pager */
+.pager {
+  text-align: center;
+}
+.pager span {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  background: #666;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  margin: 3px;
+  opacity: 0.3;
+  transition: opacity 0.2s ease-in-out;
+  -moz-transition: opacity 0.2s ease-in-out;
+  -webkit-transition: opacity 0.2s ease-in-out;
+  -o-transition: opacity 0.2s ease-in-out;
+}
+.pager .inactive {
+  cursor: pointer;
+}
+.pager .active, .pager :hover {
+  opacity: 1;
 }
