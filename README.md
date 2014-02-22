@@ -4,7 +4,7 @@ A simple jQuery carousel plugin by [Jon Alport](http://jonalport.com/)
 
 ## Demo
 
-[http://jonalport.github.com/karousel/example/](http://github.jonalport.com/karousel/example/)
+[http://jonalport.github.com/karousel/example/](http://jonalport.github.com/karousel/example/)
 
 ## Quick start
 
